@@ -1,5 +1,4 @@
-#ifndef __CHASSIS_TASK__
-#define __CHASSIS_TASK__
+#pragma once 
 
 #include "main.h"
 #include "Can_recive.h"
@@ -222,12 +221,7 @@ extern osThreadId LED_FLOW_TASKHandle;
   * @param[in]      pvParameters: 空
   * @retval         none
   */
-extern void chassis_task(void const *pvParameters);
-
-
-
-
-#endif
+void chassis_Task(void *pvParameters);
 
 
 

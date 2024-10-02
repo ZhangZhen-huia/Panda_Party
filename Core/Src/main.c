@@ -121,13 +121,7 @@ int main(void)
   MX_TIM7_Init();
   MX_SPI5_Init();
   MX_USART6_UART_Init();
-  /* USER CODE BEGIN 2 */
-	HAL_UART_Receive_IT(&huart8,uwb_receive_data,8);
-	canfilter_init_start();
-  UART_IDLE_init();
-//	/*使用uwb的yaw轴了*/
-//	mpu_device_init();
-//	init_quaternion();		
+  /* USER CODE BEGIN 2 */		
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

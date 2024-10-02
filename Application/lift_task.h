@@ -1,5 +1,4 @@
-#ifndef __LIFT_TASK__H__
-#define __LIFT_TASK__H__
+#pragma once 
 
 #include "Can_recive.h"
 #include "pid.h"
@@ -14,4 +13,4 @@ typedef enum
 
 void lift_motor_init(void);
 
-#endif
+

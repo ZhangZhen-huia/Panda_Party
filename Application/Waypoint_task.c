@@ -28,17 +28,14 @@
 
 Waypoints_t Waypoint[50];
 void Sensor_Get(void);
+osThreadId waypoint_TASKHandle;
 
-void Waypoint_task(void const * argument)
-{
+void waypoint_Task(void *pvParameters){
 	Waypoint_Init();
-	chassis_move.Paw_flag = 5;
-	while(HAL_UART_Transmit(&huart7,&chassis_move.Paw_flag,1,100)!=HAL_OK);
-
-	HAL_UART_Transmit_IT(&huart7,&chassis_move.Paw_flag,1);
-		while(1)
+	while(1)
 	{
 		Sensor_Get();
+		vTaskDelay(5);
 	}
 }
 

@@ -1,5 +1,7 @@
 #include "chassis_task.h"
 #include "pid.h"
+osThreadId chassis_TASKHandle;
+
 int num=0;
 int8_t slow_down;
 uint8_t stop_flag;
@@ -121,7 +123,7 @@ void num_0_task(chassis_move_t *chassis_move_data);
 
 /*----------------------------------------------------------------------TASK---------------------------------------------------------------------*/
 
-void chassis_task(void const * argument)
+void chassis_Task(void *pvParameters)
 {
 	
 	chassis_move.Auto_init_mode=1;
@@ -149,7 +151,7 @@ void chassis_task(void const * argument)
 												chassis_move.chassis_3508_speed_pid[2].out, chassis_move.chassis_3508_speed_pid[3].out);
 			}
 		}
-		osDelay(1);//控制频率为1khz，与can接收中断频率一致
+		vTaskDelay(2);
 	}
 }
 /*-------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -166,8 +168,7 @@ void Chassis_mode_change(chassis_move_t *chassis_move_rc_to_mode)
 	{
 		//上拨
 		case 1:	PID_CLEAR_ALL(chassis_move_rc_to_mode);
-						chassis_move_rc_to_mode->my_chassis_mode = Chassis_Remote;
-						osThreadSuspend(LED_FLOW_TASKHandle);												
+						chassis_move_rc_to_mode->my_chassis_mode = Chassis_Remote;											
 						chassis_move_rc_to_mode->Auto_init_mode = 1;
 						if(chassis_move_rc_to_mode->Remote_init_mode)
 						remote_control_chassis_init(chassis_move_rc_to_mode);
@@ -188,20 +189,11 @@ void Chassis_mode_change(chassis_move_t *chassis_move_rc_to_mode)
 						
 		//下面		
 		case 2:	PID_CLEAR_ALL(chassis_move_rc_to_mode);
-						chassis_move_rc_to_mode->my_chassis_mode = Chassis_Automatic;													
-						osThreadResume(LED_FLOW_TASKHandle);																							
+						chassis_move_rc_to_mode->my_chassis_mode = Chassis_Automatic;																																			
 						chassis_move_rc_to_mode->Remote_init_mode = 1;
 						if(chassis_move_rc_to_mode->Auto_init_mode)     
 							automatic_control_chassis_init(chassis_move_rc_to_mode);
 						chassis_move_rc_to_mode->Auto_init_mode = 0;		
-//						if(chassis_move_rc_to_mode->chassis_RC->rc.s[0]==3)
-//						{
-//							chassis_move_rc_to_mode->begin_reset=begin;
-//						}
-//						else if(chassis_move_rc_to_mode->chassis_RC->rc.s[0]==2)		// AFTER RESET
-//						{
-//							chassis_move_rc_to_mode->begin_reset=reset;
-//						}
 						chassis_automatic_control_loop(chassis_move_rc_to_mode);	
 						
 		break;
@@ -1290,10 +1282,6 @@ static void chassis_automatic_control_loop(chassis_move_t *chassis_move_control_
 	break;
 	}
 }
-	if(over)
-	{
-		track(chassis_move_control_loop);
-	}
 	Auto_pid_caculate(chassis_move_control_loop);
 }
 

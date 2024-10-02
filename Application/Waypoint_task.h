@@ -1,5 +1,4 @@
-#ifndef __WAYPOINT_TASK__H
-#define __WAYPOINT_TASK__H
+#pragma once 
 
 #include "main.h"
 
@@ -16,6 +15,6 @@ extern Waypoints_t Waypoint[50];
 void Waypoint_Write(uint8_t number,float Plo_Angle,float Plo_Length);
 void Waypoint_Init(void);
 
-#endif
+
 
 

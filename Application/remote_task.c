@@ -3,7 +3,7 @@
 #include "main.h"
 #include "chassis_task.h"
 #include "detect_task.h"
-
+osThreadId remote_TASKHandle;
 /*'''
 
 　　┏┓　　　┏┓+ +
@@ -85,14 +85,13 @@ const RC_ctrl_t *get_remote_control_point(void)
 }
 int b=0;
 int c=0;
-void remote_task(void const * argument)
+void remote_Task(void *pvParameters)
 {
 	remote_control_init();
 	while(1)
 	{
 		chassis_move.chassis_RC=get_remote_control_point();
-				b=HAL_GPIO_ReadPin(GPIOI,GPIO_PIN_0);/*读取光电传感器*/
-				c=HAL_GPIO_ReadPin(GPIOD,GPIO_PIN_12);/*读取光电传感器*/
+		vTaskDelay(5);
 	}
 	
 }

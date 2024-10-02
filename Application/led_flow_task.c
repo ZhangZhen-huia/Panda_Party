@@ -1,13 +1,13 @@
 #include "led_flow_task.h"
 #include "tim.h"
-#include "cmsis_os.h"
 #include "main.h"
 #include "gpio.h"
-#include "chassis_task.h"
 #include "freertos.h"
+#include "cmsis_os.h"
 
-void led_flow_task(void const * argument)
-{
+osThreadId led_TASKHandle;
+
+void led_Task(void *pvParameters){
 	uint32_t a=0;
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
 	while(1)
@@ -23,4 +23,5 @@ void led_flow_task(void const * argument)
 				osDelay(2);
 			};
 	}
+	vTaskDelay(25);
 }

@@ -41,9 +41,10 @@ int8_t circle_number=0;
 int8_t temp;
 void height_get(void);
 
+osThreadId lift_TASKHandle;
 
 
-void lift_task(void const * argument)
+void lift_Task(void const * argument)
 {
 	lift_motor_init();
 	while(1)
@@ -67,7 +68,7 @@ void lift_task(void const * argument)
 		/*对抬升电机赋值*/
 		CAN_cmd_Lift(Lift_speed_pid.out,0,0,0);
 		
-		osDelay(1);
+		vTaskDelay(5);
 	}
 }
 

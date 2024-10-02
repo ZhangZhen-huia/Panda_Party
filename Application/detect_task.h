@@ -1,5 +1,4 @@
-#ifndef __DETECT_TASK
-#define __DETECT_TASK
+#pragma once 
 
 #include "main.h"
 #include "cmsis_os.h"
@@ -60,5 +59,4 @@ static void detect_init(uint32_t time);
 unsigned char toe_is_error(uint8_t toe);
 void detect_hook(uint8_t toe);
 
-void detect_task(void const * argument);
-#endif
+void detect_task(void *pvParameters);

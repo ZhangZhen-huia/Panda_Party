@@ -780,6 +780,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>my_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\my_task.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -887,11 +892,6 @@
               <FilePath>..\Application\Waypoint_task.c</FilePath>
             </File>
             <File>
-              <FileName>servo_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\servo_task.c</FilePath>
-            </File>
-            <File>
               <FileName>base_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\base_usart.c</FilePath>
@@ -902,14 +902,9 @@
               <FilePath>..\Application\base_usart.h</FilePath>
             </File>
             <File>
-              <FileName>imu_task.c</FileName>
+              <FileName>start_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Application\imu_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>imu_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\imu_task.h</FilePath>
+              <FilePath>..\Application\start_task.c</FilePath>
             </File>
           </Files>
         </Group>
